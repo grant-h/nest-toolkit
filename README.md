@@ -4,6 +4,8 @@ If you get this working, send me a picture and submit a patch!
 
 It requires FreeType for font rendering and a working ARM toolchain for compilation. Until someone tests this code on a modern Nest, it will be for reference only. I [Grant] don't own a Nest right now, so I can't test this code.
 
+If you are looking for code that actually works, check out [Luke-Jr's FreeAbode](https://github.com/luke-jr/freeabode).
+
 ### Authors
 
 * Orlando Arias - UI toolkit creation
