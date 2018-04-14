@@ -5,8 +5,8 @@ Note, this assumes you have a rooted Nest thermostat generation 1 and that you h
 
 ### Videos
 
-* Nest Thermostat 3D Graphics and Fractal Demo - [![Nest Thermostat 3D Graphics and Fractal Demo](https://img.youtube.com/vi/UpQynNvkrDI/0.jpg)](https://www.youtube.com/watch?v=UpQynNvkrDI)
-* Nest Thermostat 3D Graphics - Twister - [![Nest Thermostat 3D Graphics - Twister](https://img.youtube.com/vi/uPLLFvKcikk/0.jpg)](https://www.youtube.com/watch?v=uPLLFvKcikk)
+* Nest Thermostat 3D Graphics and Fractal Demo - <br/> [![Nest Thermostat 3D Graphics and Fractal Demo](https://img.youtube.com/vi/UpQynNvkrDI/0.jpg)](https://www.youtube.com/watch?v=UpQynNvkrDI)
+* Nest Thermostat 3D Graphics - Twister - <br/> [![Nest Thermostat 3D Graphics - Twister](https://img.youtube.com/vi/uPLLFvKcikk/0.jpg)](https://www.youtube.com/watch?v=uPLLFvKcikk)
 
 ### Code Layout
 
