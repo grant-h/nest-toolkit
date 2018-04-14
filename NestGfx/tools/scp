@@ -1,0 +1,43 @@
+#!/bin/sh
+
+scp -P2222 "$1" root@192.168.1.17:"$2"
+exit
+
+if [ "$1" = "" ]; then
+  echo "Source file/folder required"
+  exit 1
+fi
+
+if [ "$2" = "" ]; then
+  echo "Destination file/folder required"
+  exit 1
+fi
+
+STORE=`mktemp -d`
+
+if [ -d "$1" ]; then
+  SRC=`dirname $1`
+  DST=`dirname $2`
+
+  echo "Copying directory $SRC"
+  cp -r "$SRC" "$STORE/$DST"
+elif [ -f "$1" ]; then
+  SRC="$1"
+  DST="$2"
+
+  if [ "$DST" = "." ]; then
+    DST=`basename $SRC`
+  fi
+
+  echo "Copying file $SRC"
+
+  cp "$SRC" "$STORE/$DST"
+else
+  echo "Unsupported file type"
+  exit 1
+fi
+
+cd "$STORE"
+tar cz "$DST" | ssh -p2222 root@192.168.1.17 'tar xvzf -'
+
+rm -rf "$STORE"

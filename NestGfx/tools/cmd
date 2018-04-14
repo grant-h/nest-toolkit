@@ -1,0 +1,18 @@
+#!/bin/sh
+
+if [ "$NESTUSER" = "" ]; then
+  echo "NESTUSER unset"
+  exit 1
+fi
+
+if [ "$NESTIP" = "" ]; then
+  echo "NESTUSER unset"
+  exit 1
+fi
+
+if [ "$1" = "" ]; then
+  echo -e "Command required to run\nusage: $0 <cmd>"
+  exit 1
+fi
+
+ssh -p2222 ${NESTUSER}@${NESTIP} "$1"

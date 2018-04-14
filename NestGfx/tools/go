@@ -1,0 +1,45 @@
+#!/bin/sh
+
+PREFIX="/home/thinkfast/documents/research2014/arm-2010q1/bin/arm-none-linux-gnueabi-"
+
+if [ ! -e "$1" ]; then
+  echo "Bad filename"
+  exit 1
+fi
+
+CFLAGS="-Os"
+LDFLAGS="-lrt -lm"
+WHICHCC=`echo "$1" | grep -q 'cpp'` 
+
+if [ "$WHICHCC" = "" ]; then
+  COMPILER="${PREFIX}gcc"
+else
+  COMPILER="${PREFIX}g++"
+fi
+
+OUTFILE=`echo "$1" | cut -d. -f1`
+
+if [ "$OUTFILE" = "${1}" ]; then
+  echo "Outfile = infile"
+  exit 1
+fi
+
+${COMPILER} ${CFLAGS} -o "${OUTFILE}" "${1}" $LDFLAGS
+
+if [ $? -ne 0 ]; then
+  echo "Compile errors"
+  exit 1
+fi
+
+${PREFIX}strip "${OUTFILE}" 
+
+echo "Transferring and running"
+./scp "${OUTFILE}" "${OUTFILE}"
+./cmd 'kill -INT `cat /tmp/killme.pid` > /dev/null 2>&1'
+
+if [ "$2" = "debug" ]; then
+  echo "Debugging mode"
+  ./cmd "./${OUTFILE} debug"
+else
+  ./cmd "./${OUTFILE}"
+fi

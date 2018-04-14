@@ -1,0 +1,25 @@
+#!/bin/sh
+
+SCRIPT=`dirname $0`
+CMD="$SCRIPT/cmd"
+
+if [ "$1" = "" ]; then
+  echo "testmode: <enter|leave>"
+  exit 1
+fi
+
+if [ "$1" = "enter" ]; then
+  echo "Stopping Monit..."
+  ${CMD} '/etc/init.d/monit stop' > /dev/null
+  echo "Stopping Nestlabs..."
+  ${CMD} '/etc/init.d/nestlabs stop' > /dev/null
+elif [ "$1" = "leave" ]; then
+  ${CMD} 'kill -INT `cat /tmp/killme.pid` > /dev/null 2>&1'
+  echo "Starting Nestlabs..."
+  ${CMD} '/etc/init.d/nestlabs start' > /dev/null
+  echo "Starting Monit..."
+  ${CMD} '/etc/init.d/monit start' > /dev/null
+else
+  echo "Bad mode transition $1"
+  exit 1 
+fi
